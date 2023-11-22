@@ -1,0 +1,46 @@
+S3 + Glue + Athena
+
+## PASSO 001 - Criar um buckets S3
+        Bucket: ia16.dados.com
+        Bucket: ia16.resultados.com
+        Copiar um arquivo para dentro do bucket
+
+## PASSO 002 - Criar um banco de dados no Glue
+          Banco: Vendas
+
+## PASSO 003 - Criar o Crawler
+          Crawler: ia16.crawler.live.1
+          Role: ia16-live
+
+#Crawl all sub-folders (Rastrear todas as subpastas)
+Rastreie todas as pastas novamente a cada rastreamento subsequente.
+
+#Crawl new sub-folders only (Rastrear apenas novas subpastas)
+Somente pastas do Amazon S3 que foram adicionadas desde o último rastreamento serão rastreadas. Se os esquemas forem compatíveis, novas partições serão adicionadas às tabelas existentes.
+
+#Crawl based on events (Rastreamento baseado em eventos)
+Confie nos eventos do Amazon S3 para controlar quais pastas rastrear.
+
+## PASSO 004 - Configurar o Athena
+          Bucket: ia16.resultados.com
+
+
+
+
+#orders - OK
+  order_id,order_date,order_customer_id,order_status
+
+#order_items - Ok  
+  order_item_id,order_item_order_id,order_item_product_id,order_item_quantity,order_item_subtotal,order_item_product_price
+
+#departments - OK
+  department_id,department_name
+
+#categories - OK 
+  category_id,category_department_id,category_name
+
+#products 
+  product_id,product_category_id,product_name,product_description,product_price,product_image
+
+#customers - OK
+  customer_id,customer_fname,customer_lname,customer_email,customer_password,customer_street,customer_city,customer_state,customer_zipcode
